@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 void wyswietlSkladniki(const vector<string>& skladniki) {
   for (string skladnik : skladniki) {
@@ -10,7 +12,7 @@ void wyswietlSkladniki(const vector<string>& skladniki) {
   }
 }
  
-void KGK(const vector<string>& skladniki, int k)
+void generateCompinationClassik(const vector<string>& skladniki, int k)
 {
     int n = skladniki.size();
     vector<int> c(k);
@@ -50,6 +52,27 @@ void KGK(const vector<string>& skladniki, int k)
         }
     }
 }
+
+void pascalTriangle(int n, int max) {
+    
+    if (n < 1 || n > max) {
+        cout << "Blad: Podana liczba (" << n << ") jest poza zakresem 1-" << max << "!" << endl;
+        return;
+    }
+ 
+    for (int i = 0; i < n; i++) {
+        int liczba = 1;
+        for (int s = 1; s <= n - i; s++) cout << "  ";
+ 
+        for (int j = 0; j <= i; j++) {
+            cout << liczba << "   ";
+            liczba = liczba * (i - j) / (j + 1);
+        }
+        cout << endl;
+    }
+}
+
+
  
 int main()
 {
@@ -105,9 +128,17 @@ int main()
               int ilosc;
               cout << "Podaj ilosc skladnikow: ";
               cin >> ilosc; 
-              KGK(skladniki, ilosc);
+              generateCompinationClassik(skladniki, ilosc);
             case 3:
               break;
+
+            case 4:
+              int krok;
+              int max_zakres;
+              cout << "Podaj krok: ";
+              cin >> krok;
+
+              pascalTriangle(krok, skladniki.size());
 
             default:
               break;
